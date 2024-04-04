@@ -2,9 +2,10 @@ import { defineConfig } from "vitepress";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "A Blog",
-  description: "This is a blog",
+  title: "PKM文档库",
+  description: "这是一个个人维护的高中化学文档库",
   base: "/blog/",
+  lastUpdated: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -25,5 +26,9 @@ export default defineConfig({
     socialLinks: [
       { icon: "github", link: "https://github.com/vuejs/vitepress" },
     ],
+    footer: {
+      message: "Released under the MIT License.",
+      copyright: "Copyright@2024 Wilfred Yang",
+    },
   },
 });
