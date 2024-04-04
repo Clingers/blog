@@ -9,8 +9,14 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: "Home", link: "/" },
-      { text: "Examples", link: "/markdown-examples" },
+      { text: "首页", link: "/" },
+      {
+        text: "入门",
+        items: [
+          { text: "必修一", link: "/chemistry/newbird1" },
+          { text: "必修二", link: "/chemistry/newbird2" },
+        ],
+      },
     ],
 
     sidebar: [
