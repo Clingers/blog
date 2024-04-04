@@ -1,5 +1,5 @@
 import { defineConfig } from "vitepress";
-
+import { set_sidebar } from "../utils/auto-gen-sidebar.mjs";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "PKM文档库",
@@ -19,15 +19,7 @@ export default defineConfig({
       },
     ],
 
-    sidebar: [
-      {
-        text: "Examples",
-        items: [
-          { text: "Markdown Examples", link: "/markdown-examples" },
-          { text: "Runtime API Examples", link: "/api-examples" },
-        ],
-      },
-    ],
+    sidebar: { "/front-end/react": set_sidebar("front-end/react") },
 
     socialLinks: [
       { icon: "github", link: "https://github.com/vuejs/vitepress" },
