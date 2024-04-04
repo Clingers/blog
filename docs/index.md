@@ -4,8 +4,8 @@ layout: home
 
 hero:
   name: "资料存储室"
-  text: "文档库"
-  tagline: My great project tagline
+  text: "PKM"
+  tagline: 浅浅记录
   actions:
     - theme: brand
       text: Markdown Examples
