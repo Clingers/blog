@@ -30,5 +30,9 @@ export default defineConfig({
       message: "Released under the MIT License.",
       copyright: "Copyright@2024 Wilfred Yang",
     },
+
+    search: {
+      provider: "local",
+    },
   },
 });
