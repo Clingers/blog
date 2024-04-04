@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "A Blog"
-  text: "This is a blog"
+  name: "资料存储室"
+  text: "文档库"
   tagline: My great project tagline
   actions:
     - theme: brand
@@ -15,11 +15,10 @@ hero:
       link: /api-examples
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: 入门
+    details: 高中化学必修
+  - title: 进阶
+    details: 高中化学选修
+  - title: 高阶
+    details: 延伸拓展
 ---
-
