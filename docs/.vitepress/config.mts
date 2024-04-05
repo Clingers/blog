@@ -19,7 +19,7 @@ export default defineConfig({
       },
     ],
 
-    sidebar: { "/front-end/react": set_sidebar("front-end/react") },
+    sidebar: { "/chemistry": set_sidebar("chemistry") },
     aside: "left", // 设置右侧侧边栏在左侧显示
 
     socialLinks: [
