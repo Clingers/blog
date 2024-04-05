@@ -1,5 +1,5 @@
 import { defineConfig } from "vitepress";
-import { set_sidebar } from "../utils/auto-gen-sidebar.mjs";
+import { set_sidebar } from "../utils/auto_sidebar.mjs";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "PKM文档库",
@@ -20,6 +20,7 @@ export default defineConfig({
     ],
 
     sidebar: { "/front-end/react": set_sidebar("front-end/react") },
+    aside: "left", // 设置右侧侧边栏在左侧显示
 
     socialLinks: [
       { icon: "github", link: "https://github.com/vuejs/vitepress" },
