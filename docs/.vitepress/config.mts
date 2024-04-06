@@ -19,7 +19,7 @@ export default defineConfig({
       },
     ],
 
-    sidebar: { "/chemistry": set_sidebar("chemistry") },
+    sidebar: { "/docs/chemistry": set_sidebar("chemistry") },
     aside: "left", // 设置右侧侧边栏在左侧显示
 
     socialLinks: [

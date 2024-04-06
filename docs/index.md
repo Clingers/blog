@@ -6,6 +6,9 @@ hero:
   name: "资料存储室"
   text: "PKM"
   tagline: 浅浅记录
+  image:
+    src: "/public/background.jpg"
+    alt: "背景"
   actions:
     - theme: brand
       text: Markdown Examples
