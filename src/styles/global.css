@@ -1,47 +1,62 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  html {
-    font-family: 'Inter', system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  body {
-    @apply bg-white text-gray-900;
-  }
-
-  /* Article body text */
-  .article-body {
-    font-family: 'Merriweather', Georgia, serif;
-  }
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Merriweather', Georgia, serif;
 }
 
-@layer components {
-  /* Navigation link */
-  .nav-link {
-    @apply text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors duration-150;
-  }
+html {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  /* Article card */
-  .article-card {
-    @apply block border-b border-gray-100 py-7 hover:bg-gray-50 transition-colors duration-150;
-  }
+.article-body {
+  font-family: var(--font-serif);
+}
 
-  /* Category tag */
-  .category-tag {
-    @apply inline-block text-xs font-medium text-gray-500 tracking-wide uppercase;
-  }
+/* ── Component classes ─────────────────────────────────── */
 
-  /* Read time badge */
-  .read-time {
-    @apply inline-block text-xs text-gray-400;
-  }
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(75 85 99);
+  transition: color 150ms;
+}
+.nav-link:hover {
+  color: rgb(17 24 39);
+}
 
-  /* Section heading */
-  .section-heading {
-    @apply text-xs font-semibold text-gray-400 uppercase tracking-widest;
-  }
+.article-card {
+  display: block;
+  border-bottom: 1px solid rgb(243 244 246);
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+  transition: background-color 150ms;
+}
+.article-card:hover {
+  background-color: rgb(249 250 251);
+}
+
+.category-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgb(107 114 128);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.read-time {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: rgb(156 163 175);
+}
+
+.section-heading {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgb(156 163 175);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
