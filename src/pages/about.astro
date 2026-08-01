@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="关于 — Wilfred's Blog" description="我是 Wilfred，一个专注研究、写作和个人成长的独立博客作者。">
+  <div class="min-h-screen bg-white">
+
+    <header class="border-b border-gray-100">
+      <div class="max-w-3xl mx-auto px-6 pt-6 pb-4">
+        <div class="flex items-center justify-between">
+          <h1 class="text-lg font-bold text-gray-900">
+            <a href="/" class="hover:text-gray-600 transition-colors">future/proof</a>
+          </h1>
+          <nav class="flex items-center gap-5">
+            <a href="/about" class="nav-link font-semibold text-gray-900">关于</a>
+            <a href="/archive" class="nav-link">归档</a>
+            <a href="/newsletter" class="nav-link">通讯</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-6 py-12">
+      <a href="/" class="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600 transition-colors mb-10">
+        ← 返回首页
+      </a>
+
+      <div class="flex items-start gap-6 mb-10">
+        <div class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center text-white font-bold text-2xl flex-shrink-0">
+          W
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-1">Wilfred</h2>
+          <p class="text-gray-500 text-sm">研究者 · 写作者 · 开发者</p>
+        </div>
+      </div>
+
+      <div class="article-body text-gray-800 leading-loose text-base space-y-4">
+        <p>
+          你好。我是一个喜欢研究 AI、研究方法论、写作的个人。
+          这个博客记录我在研究、写作和自我成长过程中的思考与发现。
+        </p>
+        <p>
+          我相信<strong>写作是思考的工具</strong>，而非思考的结果。
+          每天写一点，让混乱的想法逐渐变得清晰。
+        </p>
+
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">我在做什么</h2>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong>研究</strong> — AI Agent、知识管理、研究方法论</li>
+          <li><strong>写作</strong> — 自媒体内容、深度分析文章</li>
+          <li><strong>开发</strong> — 个人网站、效率工具</li>
+        </ul>
+
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">工具栈</h2>
+        <p>Obsidian 管理知识库，Zotero 做文献管理，Hermes Agent 处理自动化任务，Astro 构建网站。</p>
+
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">联系</h2>
+        <p>
+          如果你有兴趣合作、交换想法，或者只是想打个招呼，
+          可以在这里找到我。
+        </p>
+      </div>
+    </main>
+
+    <footer class="border-t border-gray-100">
+      <div class="max-w-3xl mx-auto px-6 py-8 text-center">
+        <p class="text-xs text-gray-400">© 2026 Wilfred · 保留所有权利</p>
+      </div>
+    </footer>
+
+  </div>
+</Layout>

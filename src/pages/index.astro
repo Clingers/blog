@@ -1,0 +1,156 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { articles, categories } from '../data/articles';
+
+const featured = articles.filter(a => a.featured);
+const rest = articles.filter(a => !a.featured);
+---
+
+<Layout title="Wilfred's Blog — 研究 · 写作 · 成长">
+  <div class="min-h-screen bg-white">
+
+    <!-- ── Header / Nav ─────────────────────────── -->
+    <header class="border-b border-gray-100">
+      <div class="max-w-3xl mx-auto px-6 pt-6 pb-4">
+
+        <!-- Site identity -->
+        <div class="flex items-center justify-between mb-5">
+          <div>
+            <h1 class="text-lg font-bold text-gray-900 tracking-tight">
+              <a href="/" class="hover:text-gray-600 transition-colors">future/proof</a>
+            </h1>
+            <p class="text-xs text-gray-400 mt-0.5">stay relevant</p>
+          </div>
+
+          <!-- Nav links -->
+          <nav class="flex items-center gap-5">
+            <a href="/about" class="nav-link">关于</a>
+            <a href="/archive" class="nav-link">归档</a>
+            <a href="/newsletter" class="nav-link">通讯</a>
+          </nav>
+        </div>
+
+        <!-- Category pills -->
+        <div class="flex items-center gap-4 flex-wrap">
+          {categories.map(cat => (
+            <a
+              href={`/category/${cat.slug}`}
+              class="text-sm text-gray-500 hover:text-gray-900 transition-colors"
+            >
+              {cat.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Main Content ─────────────────────────── -->
+    <main class="max-w-3xl mx-auto px-6">
+
+      <!-- Featured Articles -->
+      <section>
+        {featured.map(article => (
+          <a href={`/articles/${article.slug}`} class="article-card group">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="category-tag">{article.category}</span>
+              <span class="read-time">{article.readTime}</span>
+            </div>
+            <h2 class="text-xl font-bold text-gray-900 group-hover:text-gray-600 transition-colors leading-snug mb-2">
+              {article.title}
+            </h2>
+            <p class="text-sm text-gray-500 leading-relaxed">{article.excerpt}</p>
+            <div class="mt-2 text-xs text-gray-400">{article.date}</div>
+          </a>
+        ))}
+      </section>
+
+      <!-- Divider -->
+      <div class="border-t border-gray-100 my-2"></div>
+
+      <!-- Recent Articles -->
+      <section>
+        <div class="section-heading mb-4 pt-6">最近更新</div>
+        {rest.map(article => (
+          <a href={`/articles/${article.slug}`} class="article-card group">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="category-tag">{article.category}</span>
+              <span class="read-time">{article.readTime}</span>
+            </div>
+            <h2 class="text-base font-semibold text-gray-800 group-hover:text-gray-600 transition-colors leading-snug mb-1">
+              {article.title}
+            </h2>
+            <p class="text-sm text-gray-400">{article.date}</p>
+          </a>
+        ))}
+      </section>
+
+    </main>
+
+    <!-- ── Recommendations ──────────────────────── -->
+    <aside class="border-t border-gray-100 mt-16">
+      <div class="max-w-3xl mx-auto px-6 py-12">
+
+        <div class="section-heading mb-6">推荐阅读</div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Recommendation 1 -->
+          <div class="bg-gray-50 rounded-lg p-5">
+            <div class="text-xs text-gray-400 mb-2">Newsletter</div>
+            <a href="#" class="font-semibold text-gray-900 hover:text-gray-600 text-sm leading-snug block mb-1">
+              AI Operator
+            </a>
+            <p class="text-xs text-gray-400">探索 AI 在内容创作中的应用</p>
+          </div>
+
+          <!-- Recommendation 2 -->
+          <div class="bg-gray-50 rounded-lg p-5">
+            <div class="text-xs text-gray-400 mb-2">Newsletter</div>
+            <a href="#" class="font-semibold text-gray-900 hover:text-gray-600 text-sm leading-snug block mb-1">
+              Profound Ideas
+            </a>
+            <p class="text-xs text-gray-400">深度思考与创意方法论</p>
+          </div>
+
+          <!-- Recommendation 3 -->
+          <div class="bg-gray-50 rounded-lg p-5">
+            <div class="text-xs text-gray-400 mb-2">Newsletter</div>
+            <a href="#" class="font-semibold text-gray-900 hover:text-gray-600 text-sm leading-snug block mb-1">
+              Modern Freedom
+            </a>
+            <p class="text-xs text-gray-400">个人成长与财务独立</p>
+          </div>
+
+          <!-- Recommendation 4 -->
+          <div class="bg-gray-50 rounded-lg p-5">
+            <div class="text-xs text-gray-400 mb-2">Newsletter</div>
+            <a href="#" class="font-semibold text-gray-900 hover:text-gray-600 text-sm leading-snug block mb-1">
+              Write With AI
+            </a>
+            <p class="text-xs text-gray-400">AI 辅助写作实战指南</p>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- ── Footer ─────────────────────────────── -->
+    <footer class="border-t border-gray-100">
+      <div class="max-w-3xl mx-auto px-6 py-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-4 text-xs text-gray-400">
+            <a href="/" class="hover:text-gray-600 transition-colors">首页</a>
+            <a href="/about" class="hover:text-gray-600 transition-colors">关于</a>
+            <a href="/archive" class="hover:text-gray-600 transition-colors">归档</a>
+          </div>
+          <p class="text-xs text-gray-400">
+            © 2026 Wilfred · 保留所有权利
+          </p>
+        </div>
+        <p class="text-center text-xs text-gray-300 mt-4">
+          Built with Astro · Deploy on Vercel
+        </p>
+      </div>
+    </footer>
+
+  </div>
+</Layout>
