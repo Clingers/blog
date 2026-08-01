@@ -1,19 +1,22 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { articles } from '../../data/articles';
 import { links } from '../../lib/links';
+import { getCollection, render } from 'astro:content';
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
   return articles.map(article => ({
-    params: { slug: article.slug },
+    params: { slug: article.id },
     props: { article },
   }));
 }
 
 const { article } = Astro.props;
+const { Content } = await render(article);
+const { title, excerpt, category, author, readTime, date } = article.data;
 ---
 
-<Layout title={`${article.title} — Wilfred's Blog`} description={article.excerpt}>
+<Layout title={`${title} — Wilfred's Blog`} description={excerpt}>
   <div class="min-h-screen bg-white">
 
     <header class="border-b border-gray-100">
@@ -40,52 +43,32 @@ const { article } = Astro.props;
       </a>
 
       <div class="flex items-center gap-3 mb-4">
-        <span class="category-tag">{article.category}</span>
+        <span class="category-tag">{category}</span>
         <span class="text-gray-300">·</span>
-        <span class="read-time">{article.readTime}</span>
+        <span class="read-time">{readTime}</span>
         <span class="text-gray-300">·</span>
-        <span class="read-time">{article.date}</span>
+        <span class="read-time">{date.toISOString().slice(0, 10)}</span>
       </div>
 
       <h1 class="text-3xl font-bold text-gray-900 leading-tight mb-4">
-        {article.title}
+        {title}
       </h1>
 
       <p class="text-lg text-gray-500 leading-relaxed mb-8 border-l-2 border-gray-200 pl-4 italic">
-        {article.excerpt}
+        {excerpt}
       </p>
 
-      <div class="article-body text-gray-800 leading-loose text-base space-y-5">
-        <p>
-          本文内容正在撰写中。你可以在归档页面找到所有已发布的文章。
-        </p>
-        <p>
-          这个博客使用 <a href="https://astro.build" class="text-blue-600 hover:underline">Astro</a>
-          构建，部署在 GitHub Pages 上。
-        </p>
-        <blockquote class="border-l-4 border-gray-300 pl-4 text-gray-500 italic">
-          写作是将混乱的思考转化为清晰表达的过程。不要等到想清楚了再写，写着写着就清楚了。
-        </blockquote>
-        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">主要观点</h2>
-        <ul class="list-disc pl-5 space-y-2">
-          <li>建立个人知识管理系统，让研究资料有序流动</li>
-          <li>用写作驱动深度思考，而非等思考完成再写作</li>
-          <li>AI 是放大器，不是替代品——核心竞争力仍在人类这边</li>
-          <li>持续输出是建立影响力的最有效方式</li>
-        </ul>
-        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">行动建议</h2>
-        <p>
-          从今天开始，每天写 300 字。不需要完美，不需要发布，只需要写。
-          坚持 30 天，你会看到变化。
-        </p>
+      <!-- Markdown 渲染的正文 -->
+      <div class="article-body text-gray-800 leading-loose text-base space-y-5 prose prose-gray max-w-none">
+        <Content />
       </div>
 
       <div class="mt-12 pt-8 border-t border-gray-100 flex items-center gap-4">
         <div class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white font-bold text-sm">
-          {article.author.charAt(0)}
+          {author.charAt(0)}
         </div>
         <div>
-          <div class="font-semibold text-gray-900 text-sm">{article.author}</div>
+          <div class="font-semibold text-gray-900 text-sm">{author}</div>
           <div class="text-xs text-gray-400">研究者 · 写作者</div>
         </div>
       </div>

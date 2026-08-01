@@ -1,10 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { articles, categories } from '../data/articles';
 import { links } from '../lib/links';
+import { getCollection } from 'astro:content';
 
-const featured = articles.filter(a => a.featured);
-const rest = articles.filter(a => !a.featured);
+const allArticles = await getCollection('articles');
+const articles = allArticles.sort((a, b) => b.data.date - a.data.date);
+const featured = articles.filter(a => a.data.featured);
+const rest = articles.filter(a => !a.data.featured);
+
+const categories = [...new Set(articles.map(a => a.data.category))];
+
+// 与 category/[slug].astro 保持一致的 slug 映射
+const CATEGORY_SLUGS: Record<string, string> = {
+  'AI & 工具': 'ai-tools',
+  '写作策略': 'writing',
+  '营销策略': 'marketing',
+  '个人成长': 'growth',
+};
 ---
 
 <Layout title="Wilfred's Blog — 研究 · 写作 · 成长">
@@ -31,8 +43,11 @@ const rest = articles.filter(a => !a.featured);
         <!-- Category pills -->
         <div class="flex items-center gap-4 flex-wrap">
           {categories.map(cat => (
-            <a href={links.category(cat.slug)} class="text-sm text-gray-500 hover:text-gray-900 transition-colors">
-              {cat.name}
+            <a
+              href={`${links.home}category/${CATEGORY_SLUGS[cat] || cat}/`}
+              class="text-sm text-gray-500 hover:text-gray-900 transition-colors"
+            >
+              {cat}
             </a>
           ))}
         </div>
@@ -44,16 +59,16 @@ const rest = articles.filter(a => !a.featured);
 
       <section>
         {featured.map(article => (
-          <a href={links.article(article.slug)} class="article-card group">
+          <a href={links.article(article.id)} class="article-card group">
             <div class="flex items-center gap-2 mb-2">
-              <span class="category-tag">{article.category}</span>
-              <span class="read-time">{article.readTime}</span>
+              <span class="category-tag">{article.data.category}</span>
+              <span class="read-time">{article.data.readTime}</span>
             </div>
             <h2 class="text-xl font-bold text-gray-900 group-hover:text-gray-600 transition-colors leading-snug mb-2">
-              {article.title}
+              {article.data.title}
             </h2>
-            <p class="text-sm text-gray-500 leading-relaxed">{article.excerpt}</p>
-            <div class="mt-2 text-xs text-gray-400">{article.date}</div>
+            <p class="text-sm text-gray-500 leading-relaxed">{article.data.excerpt}</p>
+            <div class="mt-2 text-xs text-gray-400">{article.data.date.toISOString().slice(0, 10)}</div>
           </a>
         ))}
       </section>
@@ -63,15 +78,15 @@ const rest = articles.filter(a => !a.featured);
       <section>
         <div class="section-heading mb-4 pt-6">最近更新</div>
         {rest.map(article => (
-          <a href={links.article(article.slug)} class="article-card group">
+          <a href={links.article(article.id)} class="article-card group">
             <div class="flex items-center gap-2 mb-1.5">
-              <span class="category-tag">{article.category}</span>
-              <span class="read-time">{article.readTime}</span>
+              <span class="category-tag">{article.data.category}</span>
+              <span class="read-time">{article.data.readTime}</span>
             </div>
             <h2 class="text-base font-semibold text-gray-800 group-hover:text-gray-600 transition-colors leading-snug mb-1">
-              {article.title}
+              {article.data.title}
             </h2>
-            <p class="text-sm text-gray-400">{article.date}</p>
+            <p class="text-sm text-gray-400">{article.data.date.toISOString().slice(0, 10)}</p>
           </a>
         ))}
       </section>
