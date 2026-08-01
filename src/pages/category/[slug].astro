@@ -1,0 +1,71 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { articles, categories } from '../../data/articles';
+import { links } from '../../lib/links';
+
+export function getStaticPaths() {
+  return categories.map(cat => ({
+    params: { slug: cat.slug },
+    props: { cat },
+  }));
+}
+
+const { cat } = Astro.props;
+const catArticles = articles.filter(a => a.category === cat.name);
+---
+
+<Layout title={`${cat.name} — Wilfred's Blog`}>
+  <div class="min-h-screen bg-white">
+
+    <header class="border-b border-gray-100">
+      <div class="max-w-3xl mx-auto px-6 pt-6 pb-4">
+        <div class="flex items-center justify-between">
+          <h1 class="text-lg font-bold text-gray-900">
+            <a href={links.home} class="hover:text-gray-600 transition-colors">future/proof</a>
+          </h1>
+          <nav class="flex items-center gap-5">
+            <a href={links.about} class="nav-link">关于</a>
+            <a href={links.archive} class="nav-link">归档</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-6 py-10">
+      <a href={links.home} class="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600 transition-colors mb-8">
+        ← 返回首页
+      </a>
+
+      <h1 class="text-2xl font-bold text-gray-900 mb-8">{cat.name}</h1>
+
+      {catArticles.length === 0 ? (
+        <p class="text-sm text-gray-400">该分类暂无文章。</p>
+      ) : (
+        <div class="border-t border-gray-100">
+          {catArticles.map(article => (
+            <a
+              href={links.article(article.slug)}
+              class="article-card group"
+            >
+              <div class="flex items-center gap-2 mb-1.5">
+                <span class="category-tag">{article.category}</span>
+                <span class="read-time">{article.readTime}</span>
+              </div>
+              <h2 class="text-base font-semibold text-gray-800 group-hover:text-gray-600 transition-colors leading-snug mb-1">
+                {article.title}
+              </h2>
+              <p class="text-sm text-gray-400">{article.date}</p>
+            </a>
+          ))}
+        </div>
+      )}
+    </main>
+
+    <footer class="border-t border-gray-100">
+      <div class="max-w-3xl mx-auto px-6 py-8 text-center">
+        <p class="text-xs text-gray-400">© 2026 Wilfred · 保留所有权利</p>
+      </div>
+    </footer>
+
+  </div>
+</Layout>

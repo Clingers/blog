@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { articles, categories } from '../data/articles';
+import { links } from '../lib/links';
 
 const featured = articles.filter(a => a.featured);
 const rest = articles.filter(a => !a.featured);
@@ -13,30 +14,24 @@ const rest = articles.filter(a => !a.featured);
     <header class="border-b border-gray-100">
       <div class="max-w-3xl mx-auto px-6 pt-6 pb-4">
 
-        <!-- Site identity -->
         <div class="flex items-center justify-between mb-5">
           <div>
             <h1 class="text-lg font-bold text-gray-900 tracking-tight">
-              <a href="/blog/" class="hover:text-gray-600 transition-colors">future/proof</a>
+              <a href={links.home} class="hover:text-gray-600 transition-colors">future/proof</a>
             </h1>
             <p class="text-xs text-gray-400 mt-0.5">stay relevant</p>
           </div>
 
-          <!-- Nav links -->
           <nav class="flex items-center gap-5">
-            <a href="/blog/about" class="nav-link">关于</a>
-            <a href="/blog/archive" class="nav-link">归档</a>
-            <a href="/blog/newsletter" class="nav-link">通讯</a>
+            <a href={links.about} class="nav-link">关于</a>
+            <a href={links.archive} class="nav-link">归档</a>
           </nav>
         </div>
 
         <!-- Category pills -->
         <div class="flex items-center gap-4 flex-wrap">
           {categories.map(cat => (
-            <a
-              href={`/category/${cat.slug}`}
-              class="text-sm text-gray-500 hover:text-gray-900 transition-colors"
-            >
+            <a href={links.category(cat.slug)} class="text-sm text-gray-500 hover:text-gray-900 transition-colors">
               {cat.name}
             </a>
           ))}
@@ -47,10 +42,9 @@ const rest = articles.filter(a => !a.featured);
     <!-- ── Main Content ─────────────────────────── -->
     <main class="max-w-3xl mx-auto px-6">
 
-      <!-- Featured Articles -->
       <section>
         {featured.map(article => (
-          <a href={`/blog/articles/${article.slug}`} class="article-card group">
+          <a href={links.article(article.slug)} class="article-card group">
             <div class="flex items-center gap-2 mb-2">
               <span class="category-tag">{article.category}</span>
               <span class="read-time">{article.readTime}</span>
@@ -64,14 +58,12 @@ const rest = articles.filter(a => !a.featured);
         ))}
       </section>
 
-      <!-- Divider -->
       <div class="border-t border-gray-100 my-2"></div>
 
-      <!-- Recent Articles -->
       <section>
         <div class="section-heading mb-4 pt-6">最近更新</div>
         {rest.map(article => (
-          <a href={`/blog/articles/${article.slug}`} class="article-card group">
+          <a href={links.article(article.slug)} class="article-card group">
             <div class="flex items-center gap-2 mb-1.5">
               <span class="category-tag">{article.category}</span>
               <span class="read-time">{article.readTime}</span>
@@ -93,39 +85,24 @@ const rest = articles.filter(a => !a.featured);
         <div class="section-heading mb-6">推荐阅读</div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <!-- Recommendation 1 -->
           <div class="bg-gray-50 rounded-lg p-5">
             <div class="text-xs text-gray-400 mb-2">Newsletter</div>
-            <a href="#" class="font-semibold text-gray-900 hover:text-gray-600 text-sm leading-snug block mb-1">
-              AI Operator
-            </a>
+            <span class="font-semibold text-gray-900 text-sm leading-snug block mb-1">AI Operator</span>
             <p class="text-xs text-gray-400">探索 AI 在内容创作中的应用</p>
           </div>
-
-          <!-- Recommendation 2 -->
           <div class="bg-gray-50 rounded-lg p-5">
             <div class="text-xs text-gray-400 mb-2">Newsletter</div>
-            <a href="#" class="font-semibold text-gray-900 hover:text-gray-600 text-sm leading-snug block mb-1">
-              Profound Ideas
-            </a>
+            <span class="font-semibold text-gray-900 text-sm leading-snug block mb-1">Profound Ideas</span>
             <p class="text-xs text-gray-400">深度思考与创意方法论</p>
           </div>
-
-          <!-- Recommendation 3 -->
           <div class="bg-gray-50 rounded-lg p-5">
             <div class="text-xs text-gray-400 mb-2">Newsletter</div>
-            <a href="#" class="font-semibold text-gray-900 hover:text-gray-600 text-sm leading-snug block mb-1">
-              Modern Freedom
-            </a>
+            <span class="font-semibold text-gray-900 text-sm leading-snug block mb-1">Modern Freedom</span>
             <p class="text-xs text-gray-400">个人成长与财务独立</p>
           </div>
-
-          <!-- Recommendation 4 -->
           <div class="bg-gray-50 rounded-lg p-5">
             <div class="text-xs text-gray-400 mb-2">Newsletter</div>
-            <a href="#" class="font-semibold text-gray-900 hover:text-gray-600 text-sm leading-snug block mb-1">
-              Write With AI
-            </a>
+            <span class="font-semibold text-gray-900 text-sm leading-snug block mb-1">Write With AI</span>
             <p class="text-xs text-gray-400">AI 辅助写作实战指南</p>
           </div>
         </div>
@@ -138,17 +115,13 @@ const rest = articles.filter(a => !a.featured);
       <div class="max-w-3xl mx-auto px-6 py-8">
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div class="flex items-center gap-4 text-xs text-gray-400">
-            <a href="/blog/" class="hover:text-gray-600 transition-colors">首页</a>
-            <a href="/blog/about" class="hover:text-gray-600 transition-colors">关于</a>
-            <a href="/blog/archive" class="hover:text-gray-600 transition-colors">归档</a>
+            <a href={links.home} class="hover:text-gray-600 transition-colors">首页</a>
+            <a href={links.about} class="hover:text-gray-600 transition-colors">关于</a>
+            <a href={links.archive} class="hover:text-gray-600 transition-colors">归档</a>
           </div>
-          <p class="text-xs text-gray-400">
-            © 2026 Wilfred · 保留所有权利
-          </p>
+          <p class="text-xs text-gray-400">© 2026 Wilfred · 保留所有权利</p>
         </div>
-        <p class="text-center text-xs text-gray-300 mt-4">
-          Built with Astro · Deploy on Vercel
-        </p>
+        <p class="text-center text-xs text-gray-300 mt-4">Built with Astro · Deploy on GitHub Pages</p>
       </div>
     </footer>
 

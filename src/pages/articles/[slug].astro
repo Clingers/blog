@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { articles } from '../../data/articles';
+import { links } from '../../lib/links';
 
 export function getStaticPaths() {
   return articles.map(article => ({
@@ -15,34 +16,29 @@ const { article } = Astro.props;
 <Layout title={`${article.title} — Wilfred's Blog`} description={article.excerpt}>
   <div class="min-h-screen bg-white">
 
-    <!-- Header -->
     <header class="border-b border-gray-100">
       <div class="max-w-3xl mx-auto px-6 pt-6 pb-4">
         <div class="flex items-center justify-between mb-5">
           <div>
             <h1 class="text-lg font-bold text-gray-900">
-              <a href="/blog/" class="hover:text-gray-600 transition-colors">future/proof</a>
+              <a href={links.home} class="hover:text-gray-600 transition-colors">future/proof</a>
             </h1>
             <p class="text-xs text-gray-400 mt-0.5">stay relevant</p>
           </div>
           <nav class="flex items-center gap-5">
-            <a href="/blog/about" class="nav-link">关于</a>
-            <a href="/blog/archive" class="nav-link">归档</a>
-            <a href="/blog/newsletter" class="nav-link">通讯</a>
+            <a href={links.about} class="nav-link">关于</a>
+            <a href={links.archive} class="nav-link">归档</a>
           </nav>
         </div>
       </div>
     </header>
 
-    <!-- Article -->
     <main class="max-w-3xl mx-auto px-6 py-10">
 
-      <!-- Back -->
-      <a href="/blog/" class="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600 transition-colors mb-8">
+      <a href={links.home} class="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600 transition-colors mb-8">
         ← 返回首页
       </a>
 
-      <!-- Meta -->
       <div class="flex items-center gap-3 mb-4">
         <span class="category-tag">{article.category}</span>
         <span class="text-gray-300">·</span>
@@ -51,24 +47,21 @@ const { article } = Astro.props;
         <span class="read-time">{article.date}</span>
       </div>
 
-      <!-- Title -->
       <h1 class="text-3xl font-bold text-gray-900 leading-tight mb-4">
         {article.title}
       </h1>
 
-      <!-- Excerpt -->
       <p class="text-lg text-gray-500 leading-relaxed mb-8 border-l-2 border-gray-200 pl-4 italic">
         {article.excerpt}
       </p>
 
-      <!-- Article body placeholder -->
       <div class="article-body text-gray-800 leading-loose text-base space-y-5">
         <p>
           本文内容正在撰写中。你可以在归档页面找到所有已发布的文章。
         </p>
         <p>
           这个博客使用 <a href="https://astro.build" class="text-blue-600 hover:underline">Astro</a>
-          构建，部署在 Vercel 上。文章以 Markdown 格式管理，支持 Obsidian 直接编辑。
+          构建，部署在 GitHub Pages 上。
         </p>
         <blockquote class="border-l-4 border-gray-300 pl-4 text-gray-500 italic">
           写作是将混乱的思考转化为清晰表达的过程。不要等到想清楚了再写，写着写着就清楚了。
@@ -87,7 +80,6 @@ const { article } = Astro.props;
         </p>
       </div>
 
-      <!-- Author -->
       <div class="mt-12 pt-8 border-t border-gray-100 flex items-center gap-4">
         <div class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white font-bold text-sm">
           {article.author.charAt(0)}
@@ -100,14 +92,13 @@ const { article } = Astro.props;
 
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-gray-100">
       <div class="max-w-3xl mx-auto px-6 py-8">
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div class="flex items-center gap-4 text-xs text-gray-400">
-            <a href="/blog/" class="hover:text-gray-600 transition-colors">首页</a>
-            <a href="/blog/about" class="hover:text-gray-600 transition-colors">关于</a>
-            <a href="/blog/archive" class="hover:text-gray-600 transition-colors">归档</a>
+            <a href={links.home} class="hover:text-gray-600 transition-colors">首页</a>
+            <a href={links.about} class="hover:text-gray-600 transition-colors">关于</a>
+            <a href={links.archive} class="hover:text-gray-600 transition-colors">归档</a>
           </div>
           <p class="text-xs text-gray-400">© 2026 Wilfred · 保留所有权利</p>
         </div>

@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { links } from '../lib/links';
 ---
 
 <Layout title="关于 — Wilfred's Blog" description="我是 Wilfred，一个专注研究、写作和个人成长的独立博客作者。">
@@ -9,19 +10,18 @@ import Layout from '../layouts/Layout.astro';
       <div class="max-w-3xl mx-auto px-6 pt-6 pb-4">
         <div class="flex items-center justify-between">
           <h1 class="text-lg font-bold text-gray-900">
-            <a href="/blog/" class="hover:text-gray-600 transition-colors">future/proof</a>
+            <a href={links.home} class="hover:text-gray-600 transition-colors">future/proof</a>
           </h1>
           <nav class="flex items-center gap-5">
-            <a href="/blog/about" class="nav-link font-semibold text-gray-900">关于</a>
-            <a href="/blog/archive" class="nav-link">归档</a>
-            <a href="/blog/newsletter" class="nav-link">通讯</a>
+            <a href={links.about} class="nav-link font-semibold text-gray-900">关于</a>
+            <a href={links.archive} class="nav-link">归档</a>
           </nav>
         </div>
       </div>
     </header>
 
     <main class="max-w-3xl mx-auto px-6 py-12">
-      <a href="/blog/" class="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600 transition-colors mb-10">
+      <a href={links.home} class="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600 transition-colors mb-10">
         ← 返回首页
       </a>
 
